@@ -17,6 +17,23 @@ export type FullDayTour = {
 
 export const fullDayTours: FullDayTour[] = [
   {
+    slug: "quito-city-tour",
+    name: "Quito City Tour",
+    loc: "Quito · Pichincha",
+    alt: "2850m elevation",
+    dur: "Full Day",
+    desc: "Discover the historic capital, from the Equatorial line to the colonial old town.",
+    image: "/images/quito2.jpg",
+    images: ["/images/quito2.jpg"],
+    cloudinaryFolder: "city",
+    highlights: [
+      "Middle of the World Monument on the Equatorial line",
+      "Cable car ride with panoramic views of the city",
+      "El Panecillo viewpoint and its Virgin Mary monument",
+      "Walking tour of Quito's colonial old town",
+    ],
+  },
+  {
     slug: "otavalo-market",
     name: "Otavalo Market",
     loc: "Otavalo · Imbabura",
@@ -459,6 +476,7 @@ export const testimonials: Testimonial[] = [
 
 export const destinationNames = [
   "Otavalo",
+  "Quito",
   "Baños",
   "Mindo",
   "Cotopaxi",
