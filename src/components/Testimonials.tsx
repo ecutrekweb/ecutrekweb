@@ -1,4 +1,13 @@
+import Image from "next/image";
 import { testimonials } from "@/lib/data";
+
+function Star() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="#FFB800">
+      <path d="M12 2.5l2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17.6l-6.1 3.4 1.5-6.8-5.2-4.7 6.9-.7L12 2.5z" />
+    </svg>
+  );
+}
 
 export function Testimonials() {
   return (
@@ -12,9 +21,25 @@ export function Testimonials() {
             <p className="mb-[14px] text-[13px] tracking-[0.2em] text-accent uppercase">
               Traveler Reviews
             </p>
-            <h2 className="font-serif text-[28px] font-medium text-cream sm:text-3xl lg:text-4xl">
+            <h2 className="mb-4 font-serif text-[28px] font-medium text-cream sm:text-3xl lg:text-4xl">
               What travelers say
             </h2>
+            <div className="flex items-center gap-3">
+              <div className="rounded-md bg-white px-4 py-[10px]">
+                <Image
+                  src="/tripLogo.png"
+                  alt="TripAdvisor"
+                  width={140}
+                  height={79}
+                  className="h-15 w-auto"
+                />
+              </div>
+              <div className="flex items-center gap-[3px]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} />
+                ))}
+              </div>
+            </div>
           </div>
           <a
             href="https://www.tripadvisor.com/Attraction_Review-g294308-d26455191-Reviews-Ecutrek-Quito_Pichincha_Province.html"

@@ -7,6 +7,12 @@ import { Header } from "@/components/Header";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { getFolderImages } from "@/lib/cloudinary";
 import { WHATSAPP_NUMBER, fullDayTours } from "@/lib/data";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdScriptProps,
+  SITE_NAME,
+} from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -28,8 +34,23 @@ export async function generateMetadata({
   if (!tour) return {};
 
   return {
-    title: `${tour.name} — EcuTrek`,
+    title: tour.name,
     description: tour.desc,
+    alternates: {
+      canonical: `/tours/${tour.slug}`,
+    },
+    openGraph: {
+      title: `${tour.name} — ${SITE_NAME}`,
+      description: tour.desc,
+      url: `/tours/${tour.slug}`,
+      images: [tour.image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${tour.name} — ${SITE_NAME}`,
+      description: tour.desc,
+      images: [tour.image],
+    },
   };
 }
 
@@ -45,6 +66,33 @@ export default async function TourDetailPage({
   const cloudinaryImages = await getFolderImages(tour.cloudinaryFolder);
   const galleryImages = cloudinaryImages.length ? cloudinaryImages : tour.images;
 
+  const touristTripJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    name: tour.name,
+    description: tour.desc,
+    image: galleryImages.map((src) =>
+      src.startsWith("http") ? src : absoluteUrl(src)
+    ),
+    touristType: "Leisure",
+    url: absoluteUrl(`/tours/${tour.slug}`),
+    provider: { "@id": `${absoluteUrl("/")}#organization` },
+    itinerary: {
+      "@type": "ItemList",
+      itemListElement: tour.highlights.map((highlight, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: highlight,
+      })),
+    },
+  };
+
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Full Day Tours", path: "/#tours" },
+    { name: tour.name, path: `/tours/${tour.slug}` },
+  ]);
+
   const bookingText = `Hi! I'd like to book the ${tour.name} tour.`;
   const bookingHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     bookingText
@@ -52,6 +100,8 @@ export default async function TourDetailPage({
 
   return (
     <>
+      <script {...jsonLdScriptProps(touristTripJsonLd)} />
+      <script {...jsonLdScriptProps(breadcrumbs)} />
       <Header />
       <main className="px-6 py-16 md:px-10 lg:px-20 lg:py-20">
         <div className="mx-auto max-w-[1400px]">

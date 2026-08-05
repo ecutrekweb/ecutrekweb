@@ -1,11 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { WHATSAPP_DISPLAY } from "@/lib/data";
+import { WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/data";
 
 export function Footer() {
   return (
-    <footer className="bg-deep-green-dark px-6 pt-16 pb-10 md:px-10 lg:px-20">
+    <footer
+      id="contact"
+      className="bg-deep-green-dark px-6 pt-16 pb-10 md:px-10 lg:px-20"
+    >
       <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 border-b border-cream/12 pb-10 sm:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">
@@ -30,7 +33,17 @@ export function Footer() {
           <p className="mb-2 text-[14.5px] text-cream/75">
             {WHATSAPP_DISPLAY}
           </p>
-          <p className="text-[14.5px] text-cream/75">ecutrek@hotmail.com</p>
+          <p className="mb-4 text-[14.5px] text-cream/75">
+            ecutrek@hotmail.com
+          </p>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-lg bg-accent-btn px-5 py-[10px] text-sm font-medium tracking-wide text-white hover:bg-accent-btn-hover"
+          >
+            Message on WhatsApp
+          </a>
         </div>
         <div>
           <div className="mb-4 text-[13px] tracking-[0.12em] text-accent uppercase">

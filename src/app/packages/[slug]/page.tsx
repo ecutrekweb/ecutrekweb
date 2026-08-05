@@ -7,6 +7,12 @@ import { Header } from "@/components/Header";
 import { ImageCarousel } from "@/components/ImageCarousel";
 import { getFolderImages } from "@/lib/cloudinary";
 import { WHATSAPP_NUMBER, packages } from "@/lib/data";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  jsonLdScriptProps,
+  SITE_NAME,
+} from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -28,8 +34,23 @@ export async function generateMetadata({
   if (!pack) return {};
 
   return {
-    title: `${pack.title} — EcuTrek`,
+    title: pack.title,
     description: pack.desc,
+    alternates: {
+      canonical: `/packages/${pack.slug}`,
+    },
+    openGraph: {
+      title: `${pack.title} — ${SITE_NAME}`,
+      description: pack.desc,
+      url: `/packages/${pack.slug}`,
+      images: [pack.image],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${pack.title} — ${SITE_NAME}`,
+      description: pack.desc,
+      images: [pack.image],
+    },
   };
 }
 
@@ -47,6 +68,36 @@ export default async function PackageDetailPage({
     ? cloudinaryImages
     : [pack.image];
 
+  const touristTripJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    name: pack.title,
+    description: pack.desc,
+    image: galleryImages.map((src) =>
+      src.startsWith("http") ? src : absoluteUrl(src)
+    ),
+    touristType: "Leisure",
+    url: absoluteUrl(`/packages/${pack.slug}`),
+    provider: { "@id": `${absoluteUrl("/")}#organization` },
+    ...(pack.itinerary.length > 0 && {
+      itinerary: {
+        "@type": "ItemList",
+        itemListElement: pack.itinerary.map((day) => ({
+          "@type": "ListItem",
+          position: day.day,
+          name: day.title,
+          description: day.description,
+        })),
+      },
+    }),
+  };
+
+  const breadcrumbs = breadcrumbJsonLd([
+    { name: "Home", path: "/" },
+    { name: "Ecuador Packages", path: "/#packages" },
+    { name: pack.title, path: `/packages/${pack.slug}` },
+  ]);
+
   const bookingText = `Hi! I'd like to book the ${pack.title} package.`;
   const bookingHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
     bookingText
@@ -54,6 +105,8 @@ export default async function PackageDetailPage({
 
   return (
     <>
+      <script {...jsonLdScriptProps(touristTripJsonLd)} />
+      <script {...jsonLdScriptProps(breadcrumbs)} />
       <Header />
       <main className="px-6 py-16 md:px-10 lg:px-20 lg:py-20">
         <div className="mx-auto max-w-[1400px]">
