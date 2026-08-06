@@ -2,7 +2,7 @@ const STATS = [
   { value: "28", label: "Years guiding travelers across Ecuador" },
   { value: "15+", label: "Curated destinations, from Sierra to Amazon" },
   { value: "100%", label: "Private, personalized itineraries" },
-  { value: "4.9", label: "Average TripAdvisor rating" },
+  { value: "5", label: "Average TripAdvisor rating" },
 ];
 
 export function Intro() {
@@ -16,10 +16,10 @@ export function Intro() {
           Every landscape has a story. We take the time to tell it well.
         </h2>
         <p className="max-w-[520px] text-[17px] leading-[1.75] text-body">
-          From the cobbled markets of Otavalo to the crater lakes of the
-          Sierra and the islands of Galápagos, our trips are built around
-          unhurried mornings, real conversations, and a guide who knows the
-          terrain like a second home.
+          From the cobbled markets of Otavalo to the crater lakes of the Sierra
+          and the islands of Galápagos, our trips are built around unhurried
+          mornings, real conversations, and a guide who knows the terrain like a
+          second home.
         </p>
       </div>
       <div className="grid grid-cols-2 gap-8">
