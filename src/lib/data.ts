@@ -452,25 +452,25 @@ export type Testimonial = {
 
 export const testimonials: Testimonial[] = [
   {
-    name: "Alejandro M.",
-    date: "Jan 2025",
-    title: "Mountains, Jungle, Galápagos, Mountaineering",
+    name: "Tracy S.",
+    date: "Apr 2026",
+    title: "A great day with Cristian",
     quote:
-      "Cris Erazo is unique — knowledgeable, funny, extremely professional, and really cares that your trip will be everything you wanted. An expert in acclimatization, always safety conscious and down to earth.",
+      "Cristian was a GREAT tour guide! He picked us up from the airport, took us for lunch, and safely transported us up to Papallacta for a hike in the hummingbird forest. He pointed out various birds and wild life, assisted us with entry to the hot springs, took us to a great restaurant for dinner and dropped us at the airport with plenty of time to make our flight. We highly recommend him for all of your touring needs!",
   },
   {
-    name: "Wolfgang B.",
-    date: "Feb 2023",
+    name: "Dianne P.",
+    date: "Feb 2026",
     title: "Estupenda!",
     quote:
-      "Ecutrek ha sido nuestro guía familiar desde hace varios años. La calidad de servicio es extraordinaria y la planeación del viaje estupenda.",
+      "Christian is AMAZING!!! We booked it the night before our trip due to a last minute change of plans and it was extremely flexible and responsive. Arrived in time to pick up our group of 11 people in Quito. He was very friendly and patient with our group. There was absolutely no problem. We booked it for 7 days where it took us from Quito to four other cities in Ecuador that were quite distant from each other",
   },
   {
-    name: "SMOK77",
-    date: "Dec 2024",
-    title: "Reliable, Friendly, Accommodating",
+    name: "Jesseca C.",
+    date: "Jan 2026",
+    title: "Best private guide/driver!",
     quote:
-      "Cristian and his team were accommodating and friendly. Every trip was exactly what we expected and right on schedule.",
+      "We had the absolute pleasure of having Cristian as our private driver throughout our 8-day trip in Ecuador, and we truly cannot recommend him enough. Cristian handled multiple transfers for us, including a 10-hour drive from Baños to Montañita, all in a large, comfortable van that we requested. He was always punctual, reliable, and professional, making every drive smooth and stress-free..",
   },
 ];
 
